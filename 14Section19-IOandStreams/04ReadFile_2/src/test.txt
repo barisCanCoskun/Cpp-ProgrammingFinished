@@ -1,0 +1,3 @@
+Boris 60 56.75
+Franko 50 98.23
+Bahri 80 30.30

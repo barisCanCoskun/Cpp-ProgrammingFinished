@@ -1,0 +1,1783 @@
+Section 6: Variables & Constants
+
+**********************************************************
+Lecture 43.Section Overview
+-Declaring variables
+
+-C++ primitive types
+	-integer
+	-floating point
+	-boolean
+	-character
+
+-sizeof opearator
+
+-What is constants
+-Declaring constants
+-Literal constants
+-Constant expressions
+**********************************************************
+
+**********************************************************
+Lecture 44.What is a variable?
+-A variable is an abstraction for a memory location
+-Allow programmers to use meaningful names and not memory addresses
+-Variables have 2 main properties : 
+	-Type - their category(integer, real number, string, Person, Account...)
+	-Value - the contents (10, 3.14, "Frank"...)
+**********************************************************
+
+**********************************************************
+Lecture 45.Declaring and Initializing Variables
+
+Declaring Variables
+	VariableType VariableName;
+	
+	int age;
+	double rate;
+	string name;
+	
+	Account franks_account;
+	Person james;
+	
+Initializing Variables
+
+	int age;		// uniniliazied
+
+	int age = 21;	// C like initialization 
+
+	int age(21);	// Constructor initialization 
+
+	int age{21}; 	// C++11 list initialization 
+**********************************************************	
+
+**********************************************************	
+Lecture 47.C++ Built-in Primitive Types
+-Fundamental data types implemented directly by the C++ language
+
+-Character types
+-Integer types
+	-signed and unsigned
+-Floating-point types
+-Boolean type
+
+-Size and precision is often compiler-dependent
+	-#include<climits>
+
+
+It's important to keep in mind that unlike many other programming languages,
+
+the size and precision of c++'s primitive data types are largely dependent 
+
+on the platform that you're working on the compiler you're using.
+
+This means that as a c++ programmer, you need to be aware of 
+
+your specific machine and understand how much storage is allocated 
+
+for these types to effectively use them.
+**********************************************************
+**********************************************************
+
+
+Section 7: Arrays & Vectors
+
+**********************************************************
+Lecture 55. Declaring and Initializing Arrays
+
+Initialization list method!!!!
+	int test_scores[5] {100, 90, 50, 65, 88};
+
+**********************************************************
+Lecture 58. Declaring and Initializing Vectors
+Vectors	
+-Suppose we want to store test scores for my school
+-I have no way of knowing how many students will register next year
+-Options
+	-Pick a size that you are not likely to exceed and use static arrays
+	-Use a dynamic array such as vector
+	
+What is vector?
+-Container in the C++ STL
+-An array that can grow and shrink in size at execution time 
+-Provides similar semantics and syntax as arrays
+-Very efficient 
+-Can provide bounds checking 
+-Can use lots of cool funcs like sort, reverse, find, and more
+
+Declaring
+
+#include <vector>
+using namespace std;
+
+vector <char> vowels;
+
+vector <int> test_scores;
+---------------------------------------------------------------
+
+#include<vector>            //include vector LIBRARY
+
+using namespace std;     //vector type is part of the standard library
+
+    // std::vector <char> vowels {'a', 'e', 'i', 'o', 'u'};     //vector type is part of the standard library
+
+    vector <char> vowels (5);            //constructor initialization syntax
+
+    vector <int> test_scores (10);      //unlike arrays, these 10 integers will be automatically set to 0
+										// I dont have to do that explicitly myself
+---------------------------------------------------------------
+
+Initializing
+
+vector <char> vowels {'a', 'e', 'i', 'o', 'u'};
+
+vector <int> test_scores {100, 98, 85, 70};
+
+vector <float> hi_temperatures (365, 80.0);		//notice that there are two values in the parentheses.
+
+*The first value or parameter is the initial size of the vector. In this case 365.
+
+The second value is what you want to initialize all the 365 floats to.
+
+In this case, we're declaring a vector of 365 floats
+
+and we're initializing all of those floats to 80.0 degrees fahrenheit.
+
+***********Recap**********
+
+-We learned that vectors are an object-oriented container, defined in the standard template library.
+
+-We must include the vector include file to use them and they belong to the standard namespace.
+
+-Like arrays, vectors allow you to tell the compiler to give you a collection of as
+
+many elements as you want and give the entire collection a single name.
+
+-Vectors are dynamic in size which means they can grow and shrink as needed at runtime.
+
+-Like arrays, vector data is stored contiguously in memory.
+
+-Vector elements are individually accessible. Vector indexes start at 0 and end at position size minus one.
+
+-******If you use the subscript operator, that's the square brackets
+
+to access vector elements, then vectors will provide no bounds checking.
+
+This provides the same behavior as arrays.********
+
+-However, vectors provide a rich set of functions that do provide type checking.
+
+As a programmer, you can decide what you need to use.
+
+Unlike arrays, when you declare a vector, the vector elements
+
+will automatically be initialized to 0 unless you specify otherwise.
+
+**********************************************************
+
+Lecture 59. Accessing and Modifying Vector Elements
+
+vector <int> test_scores {100, 98, 85, 70};
+
+cout << test_scores[3] << endl;      	 // array syntax
+
+cout << test_scores.at(2) << endl;       // vector syntax
+
+cin >> test_scores.at(1);       		 // vector syntax
+
+test_scores.push_back(50);				 // 100, 98, 85, 70, 50
+**********************************************************
+
+
+Section 8: Statements & Operators
+
+**********************************************************
+Lecture 62. Section Overview
+
+Expressions, Statements and Operators
+	-Expressions : building blocks of statements
+	-Statements and block statements
+		-statements: building blocks of programming and cpp
+		-block statements = compound statements
+	-Operators
+		-Assignment
+		-Arithmetic
+		-Increment and decrement
+		-Equality
+		-Relational
+		-Logical
+		-Compound assignment
+		-Precedence
+
+I've already seen variable declaration statements and I/O statements, 
+simple assignment statements and even the return statements.
+
+If we put together expressions, containing relational and logical operators,
+we can solve extremely complex problems.
+**********************************************************
+
+Lecture 62. Expressions and Statements
+Expressions
+An expression is:
+	-The most basic building block of a program
+	-"a seqence of operators and operands that specifies a computation"
+	-Computes a value from a number of operands
+	-There is much, much more to expressions-not necessary at this level
+	
+Expressions-examples
+
+34					// literal 
+
+favorite_number		// variable
+
+1.5 + 2.8 			// addition
+
+2 * 5 				// multiplication
+
+a > b 				// relational
+
+a = b 				// assignment : this is also an expression because the value of this 
+									expression is what we just assign 
+
+Statements
+A statement is: 
+	-A complete line of code that performs some action 
+	-Usually terminated with a semi-colon
+	-Usually contain expressions 
+	-C++ has many types of statements 
+		-expression, null, compound, selection, iteration, 
+		 declaration, jump, try blocks, and others.
+
+Statements are usually terminated with a semicolon.
+When you first learn c++,
+it's a very common error to forget to terminate statements with semicolons.
+Statements usually contain expressions.
+As you would expect, c++ has many types of statements.
+
+Statements-examples
+
+int x;											// declaration
+
+favorite_number = 12;							// assignment
+
+1.5 + 2.8;										// expression
+
+x = 2 * 5;										// assignment
+
+if(a > b) cout << "a is greater than b";		// if  
+
+; 												// null 
+
+**********************************************************
+
+Lecture 64. Using opearators
+-C++ has a rich set of operators
+	-unary, binary, ternary
+
+-Common operators can be grouped as follows:
+	-assignment							-logical
+	-arithmetic							-member access : aray subscript operator []
+	-increment/decrement				-other
+	-relational
+**********************************************************
+
+Lecture 65. The assignment opearator ( = )
+
+					lhs = rhs
+					
+-rhs is an expression that is evaluated to a value
+-The value of the rhs is stored to the lhs 
+
+-The value of the rhs must be type compatible with the lhs
+-The lhs must be assignable
+
+-Assignment expression is evaluated to what was just assigned
+-More than one variable can be assigned in a single statement
+
+int num1 {10};
+int num2 {20};		// this is not assignment, it's initialization !!!!!!!!!!!!
+	
+***it's important understand the difference!!!!!
+
+Initialization happens when the variable is declared, and it gets that value for the very first time.
+
+Assignment is when you change a value that already exists in the variable.
+
+assignment expression : lhs = rhs 
+
+assignment statement :  lhs = rhs;
+
+num1 = 100;
+
+In this case, we are evaluating right hand side expression.
+
+It's a literal. It's going to validate to 100.
+
+***l-value   r-value !!
+
+The L-value is the location of that variable.
+
+**********************************************************
+
+
+Section 11: Functions
+
+**********************************************************
+Lecture 106. Default Argument Values
+
+-When a func is called, all arguments must be supplied
+
+-Sometimes some of the arguments have the same values most of the time
+
+-We can tell the compiler to use default values if the arguments are not supplied 
+
+-Default values can be in the prototype or definition, not both
+	-best practice - in the prototype
+	-must appear at the tail end of the parameter list
+	
+-Can have multiple default values
+	-must appear consecutively at the tail end of the parameter list 
+
+
+Example - single default argument
+
+double calc_cost (double base_cost, double tax_rate = 0.06);
+
+int main (){
+	double cost{};
+	
+	cost = calc_cost(200.0);			//will use the default tax
+	cost = calc_cost(100.0, 0.08);		//will use 0.08 not the default 
+	
+	return 0;
+}
+
+double calc_cost (double base_cost, double tax_rate)
+{
+	return base_cost += (base_cost * tax_rate);
+}
+
+**********************************************************
+Lecture 107. Overloading Funcs
+
+-We can have funcs that have different parameter lists that have the same name 
+
+-Abstraction mechanism since we can just think 'print' for example
+
+-A type of polymorphism 
+	-We can have the same name work with different data types to execute 
+	similar behavior
+
+-The compiler must be able to tell the funcs apart based on the  
+ parameter lists and argument supplied
+ 
+Example
+
+int add_numbers(int, int);					// add ints
+double add_numbers(double, double);			// add doubles
+
+int main() {
+	cout << add_numbers(10, 20) << endl;		// integer
+	cout << add_numbers(10.0, 20.0) << endl;	// double
+	
+	return;
+}
+
+int add_numbers(int a, int b)
+{
+	return a + b;
+}
+
+double add_numbers(double a, double b)
+{
+	return a + b;
+}
+---------------------------------------------------------------
+
+Example
+
+void display(int n);
+void display(double d);
+void display(std::string s);
+void display(std::string s, std:: string t);
+void display(std::vector<int> v);
+void display(std::vector<std::string> v);
+---------------------------------------------------------------
+
+*There is one restriction to func overloading. 
+The return type is not considered when the compiler is trying to determine, 
+which func to call.
+
+*Return type is not considered
+
+int 	get_value();
+double  get_value();
+
+// compiler ERROR 
+
+cout << get_value << endl; 		// Which one ?
+
+*Overloading funcs are used extensively in object-oriented design. 
+
+**********************************************************
+
+Lecture 109. Pass by Reference
+
+Example
+---------------------------------------------------------------
+void scale_number(int &num);	
+
+int main() {
+	int number{1000};
+	
+	scale_number(number);
+	cout << number << endl;			// 100
+	
+	return 0;
+}
+
+void scale_number(int &num)			//definition 
+{
+	if(num > 100)
+		num = 100;
+}
+---------------------------------------------------------------
+
+*Notice that the parameter list to the func is not an int name num, 
+ it's a reference to an int name num.
+ When we use num in the func body, we're referencing the actual parameter.
+
+**********************************************************
+
+Lecture 111. How do Func Calls Work ?
+
+-Funcs use the 'func call stack'
+	-Analogous to a stack of books
+	-LIFO - Last In First Out
+	-push and pop
+
+-Stack Frame or Activation Record
+	-Funcs must return control to func that called it
+	-Each time a func is called we create a new activation record 
+	 and push it on stack
+	-When a func terminates we pop the activation record and return 
+	-Local variables and func params are allocated on the stack
+	
+-Stack size finite - Stack Overflow
+---------------------------------------------------------------
+
+void func2(int &x, int y, int &z){
+	x += y + z;
+}
+
+int func1(int a, int b){
+	int result{};
+	result = a + b;
+	func2(result, a, b);
+	return result;
+}
+
+int main() {
+	int x{10};
+	int y{20};
+	int z{};
+	
+	z = func1(x, y);
+	cout << z << endl;
+	
+	return 0;
+}
+---------------------------------------------------------------
+
+What typically happens when main calls func1 (or any func calls another) ?
+There are other ways to acheive the same results. 
+
+	main:
+		-push space for the return value
+		-push space for the params
+		-push the return address			//thats important because func1 needs to know where to come back to.
+		-transfer control to func1(jmp)
+	func1:
+		-push the address of the previous activation record		//thats basically moving a stack pointer
+																//that way yo know where the top of stack is.
+		-push any register values that will need to be restored before 
+		 returning to the caller
+		-perform the code in func1
+		-restore the register values
+		-restore the previous activation record (move the stack pointer)
+		-store any func result
+		-transfer control to the return address(jmp)
+	main:
+		-pop the params
+		-pop the return value
+
+**********************************************************
+
+Lecture 128. What is a Reference ?
+
+When we use the range based for loop we aren't passing any values at all. 
+We iterating through the container and using the container elements one at a time 
+in each iteration.
+If we don't use an ampersand, then a copy of the container element is made each time. 
+If we use an ampersand (a reference) then no copy will be made and 
+the container element will be accessed by reference.
+
+**********************************************************
+
+Lecture 129. L-values and R-values
+
+l-values
+	-values that have names and are addressable 
+	-modifiable if they are not consts 
+	
+int x{100}; 	// x is an l-value
+x = 200;
+x = 200 + 10;
+
+string name;	// name is an l-value
+name = "Boris";
+
+*It's important that the fundamentals make sense now so that when we move on the topics 
+like C++ 11' s r-value references and move semantics, they'll be much clearer. 
+
+*l-value is an object that occupies a location in memory and is addressable. 
+
+100 = x;		// 100 is NOT an l-value, it's a literal, 
+				// compiler error: 100 is not an assignable l-value
+(1000 + 20) = x;
+
+string name;
+"Can" = name;	// "Can" is NOT an l-value
+---------------------------------------------------------------
+r-values
+- r-value(non-addressable and non-assignable)
+	-on the right hand side of an assignment expression
+	-a literal 
+	-a temporary which is intended to be non-modifiable
+
+int x{100};				// 100 is an r-value
+int y = x + 200; 		// (x + 200) is an r-value: a temporary which is intended to be non-modifiable
+
+string name;
+name = "Boris";			// "Boris" is an r-value
+
+int max_num = max(20, 30);	// max(20, 30) is an r-value
+---------------------------------------------------------------
+
+int x{100};
+int y{0};
+
+y = 100;			// r-value 100 assigned to l-value y
+
+x = x + y;			// r-value (x + y) assigned to l-value x
+---------------------------------------------------------------
+
+l-value references
+
+-The references we've used are l-value references
+	-Because we're referencing l-values
+
+int x{100};
+
+int &ref1{x};		// ref1 is reference to an l-value. ref1 is an alias for x
+ref1 = 20;			
+
+int &ref2 = 50;		// Error 50 is an r-value
+---------------------------------------------------------------
+
+-The same when we pass-by-reference
+
+int square(int &n) {
+	return n*n;
+}
+
+int num{10};
+
+square(num);		// OK
+
+square(5);			// Error - can't reference r-value 5
+---------------------------------------------------------------
+
+**********************************************************
+
+**********************************************************
+
+Section 13: OOP - Classes and Objects
+
+Lecture 134. Section Overview
+
+-What is OOP ?
+-What are Classes and Objects ?
+-Declaring Classes and Objects
+-Dot and pointer operators
+-public and private access modifiers
+-Methods, Constructors and Destructors
+	-class methods
+	-default and overloaded constructors
+	-copy and move constructors
+	-shallow vs deep copying
+	-this pointer
+	
+-static class members
+-struct vs class
+-friend of a class
+
+**********************************************************
+
+Lecture 135. What is OOP ?
+
+-Procedural Programming
+
+-Procedural Programming limitations
+
+-OOP concepts and their advantages 
+
+-OOP limitations 
+---------------------------------------------------------------
+
+Procedural Programming
+
+-Focus is on processes or actions that a program takes 
+
+-Programs are typically a collection of funcs 
+
+-Data is declared separately 
+
+-Data is passed as arguments into funcs
+
+-Fairly easy to learn
+---------------------------------------------------------------
+
+Procedural Programming limitations
+
+-Funcs need to know the structure of the data.
+	-if the struc of the data changes many funcs must be changed 
+	
+-As programmers get larger thay become more:
+	-difficult to understand
+	-difficult to maintain
+	-difficult to extend
+	-difficult to debug
+	-difficult to reuse code
+	-fragile and easier to break
+---------------------------------------------------------------
+
+What is OOP ?
+
+-Classes and Objects
+	-focus is on classes that model real-world domain entities
+	-allows devs to think at a higher level of abstraction
+	-used successfully in very large programs
+	
+-Encapsulation
+	-objects contain data AND operations that work on data 
+	-ADT : Abstract Data Type
+
+*Encapsulation is another mechanism used by oop to help us deal with complexity. 
+
+-Information-hiding 
+	-implementation-specific logic can be hidden
+	-users of the class code to the interface since they dont need to know 
+	 the implementation 
+	-more abstraction
+	-easier to test, debug, maintain and extend 
+
+-Reusability 
+	-easier to reuse classes in other apps
+	-faster dev 
+	-higher quality 
+
+-Inheritance
+	-can create new classes in term of existing classes
+	-reusability 
+	-polymorphic classes 
+	
+-Polymorphism and more... 
+---------------------------------------------------------------
+
+Limitations 
+
+-Not a panacea
+	-OOP wont make bad code better
+	-not suitable for all types of problems
+	-not everything decomposes to a class
+	
+-Learning curve 
+	-usually a steeper learning curve, espacially for C++
+	-many OO languages, many variations of OO concepts 
+	
+-Design
+	-usually more up-front design is necessary to create good models and hierarchies 
+	
+-Programs ca be:
+	-larger in size
+	-slower
+	-more complex 
+
+**********************************************************
+
+Lecture 136.What are Classes and Objects ? 
+
+-Classes
+	-blueprint from which objects are created
+	-a user defined data type
+	-has attributes(data) and methods(funcs)
+	-can hide data and methods
+	-provides a public interface
+	
+-Example classes
+	-Account
+	-Employee
+	-Image
+	-std::vector		// in STL
+	-std::string		// in STL 
+
+-Objects
+	-created from a class
+	-represent a specific instance of a class
+	-can create many, many objs
+	-each has its own identity
+	-each can use the defined class methods
+	
+-Example Account objects
+	-Jim's and Frank's accounts are instances of an Account
+	-Each has its own balance, can make deposits, withdrawals, etc.
+
+int high_score;
+
+Account frank_account;
+
+std::vector<int> scores;
+
+**********************************************************
+
+Lecture 137.Declaring a Class and Creating Objects
+
+class Class_Name
+{
+	declarations;
+};
+---------------------------------------------------------------
+
+class Player
+{
+	//attributes
+	std::string name;
+	int health;
+	int xp;
+	
+	//methods
+	void talk(std::string text_to_say);
+	bool is_dead();
+};
+---------------------------------------------------------------
+
+Creating objs
+
+Player baris;
+Player hero;
+
+Player *enemy = new Player();		// pointer to Player object 
+
+delete enemy;
+---------------------------------------------------------------
+
+class Account
+{
+	//attributes
+	std::string name;
+	double balance;
+	
+	//methods
+	bool withdraw(double amount);
+	bool deposit(double amount);
+};
+---------------------------------------------------------------
+
+Account baris_account;
+Account refik_account;
+
+Account accounts[]{baris_account, refik_account};
+
+std::vector<Account> accounts1{baris_account};
+
+accounts1.pushback(refik_account);
+---------------------------------------------------------------
+
+**********************************************************
+
+Lecture 139. public and private
+
+Class Member Access Modifiers
+public, private, and protected
+
+-public 
+	-accessible everywhere
+
+-private	
+	-accessible only by members or friends of the class
+
+-protected	
+	-used with inheritance - we'll talk about in the next section 
+---------------------------------------------------------------
+public 
+
+	class Class_Name
+	{
+	public:
+
+		// declarations;
+	};
+---------------------------------------------------------------
+private 
+
+	class Class_Name
+	{
+	private:
+
+		// declarations;
+	};
+---------------------------------------------------------------
+protected 
+
+	class Class_Name
+	{
+	protected:
+
+		// declarations;
+	};
+---------------------------------------------------------------
+
+class Player
+{
+private:
+	//attributes
+	std::string name;
+	int health;
+	int xp;
+
+public:
+	//methods
+	void talk(std::string text_to_say);
+	bool is_dead();
+};
+---------------------------------------------------------------
+
+**********************************************************
+
+Lecture 147. Copy Constructor
+
+-When objs are copied C++ must create a new obj from an existing obj
+
+-When is a copy of an obj made ?
+	-passing obj by value as a param 
+	-returning an obj from a func by value
+	-constructing one obj based on another of the same class
+
+-C++ must have a way of accomplishing this 
+ so it provides a compiler-defined copy constructor if you dont 
+ 
+Pass obj by-value
+---------------------------------------------------------------
+Player hero{"Hero", 100, 20};
+
+void display_player(Player p){
+	// p is a COPY of hero in this example
+	// use p
+	// Destructor for p will be called
+
+}
+
+display_player(hero);
+---------------------------------------------------------------
+
+Return obj by value
+---------------------------------------------------------------
+Player enemy;
+
+Player create_super_enemy(){
+	Player an_enemy{"Super Enemy", 100, 100};
+	return an_enemy; 		// A COPY of an_enemy is returned
+}
+
+enemy = create_super_enemy();
+---------------------------------------------------------------
+
+Constructor one obj based on another
+---------------------------------------------------------------
+Player hero{"Hero", 100, 100};
+
+Player another_hero{hero};		// A COPY of hero is made 
+
+---------------------------------------------------------------
+
+-Copies the values of each data member to the new obj
+	-default memberwise copy 
+
+-Perfectly fine in many cases
+
+-Beware if you have a pointer data member
+	-Pointer will be copied 
+	-Not what it is pointing 
+	-Shallow vs. Deep copy 
+---------------------------------------------------------------
+
+Best practices
+-Provide a copy constructor when your class has raw pointer members 
+
+-Provide the copy constructor with a const reference param 
+
+-Use STL classes as member attributes as they already provide copy constructors 
+
+-Avoid using raw pointer data members if possible 
+---------------------------------------------------------------
+
+Declaring the Copy Constructor
+
+Type::Type(const Type &source);
+
+Player::Player(const Player &source);
+
+Account::Account(const Account &source);
+
+Why by reference and constant ? 
+First, if we pass it in by value, then we have to make a copy of it. 
+That's the whole point of the copy constructor. 
+We would defeat the purpose and end up with never ending recursive calls. 
+
+And as a const bec the semantics of copying means that 
+we're copying the source, not modifying it. 
+---------------------------------------------------------------
+
+Implementing the Copy Constuctor
+
+Type::Type(const Type &source){
+	// code or initialization list to copy the object
+}
+
+Player
+
+Player::Player(const Player &source)
+	: name{source.name}, health{source.health}, xp{source.xp} {
+}
+
+**********************************************************
+
+Lecture 148. Shallow copying with the Copy Ctor 
+
+Shallow vs Deep Copying
+
+-Consider a class that contains a pointer as a data member 
+
+-Ctor allocates storage dynamically and initializes the pointer 
+
+-Destructor releases the memory allocated by the ctor
+
+-What happens in the default copy ctor ?
+
+
+
+
+**********************************************************
+**********************************************************
+**********************************************************
+**********************************************************
+**********************************************************
+**********************************************************
+**********************************************************
+**********************************************************
+**********************************************************
+**********************************************************
+
+
+**********************************************************
+
+Section 17: Smart Pointers
+
+**********************************************************
+
+Lecture 198. What is a Smart Pointer? Ownership and RAII 
+
+Smart Pointers 
+
+What r they ?
+
+-Objects
+
+-Can only point to heap-allocated memory
+
+-Automatically call delete when no longer needed 
+
+-Adhere to RAII principles
+
+-C++ Smart Pointers
+	-Unique pointers(unique_ptr)
+	-Shared pointers(shared_ptr)
+	-Weak pointers(weak_ptr)
+	-Auto pointers(auto_ptr) 		Deprecated - will not discuss 
+	
+In fact, smart ptrs are implemented as C++ template classes, which we can instantiate. 
+---------------------------------------------------------------
+
+What r they ?
+
+- #include <memory>
+
+-Defined by class templates 
+
+	-Wrapper around a raw pointer 
+	
+	-Overloaded operators
+		-Dereference (*)
+		-Member selection (->)
+		-Pointer arithmetic not supported(++, --, etc.)
+		
+	-Can have custom deleters 
+
+The actual implementation of smart ptrs is compiler dependent. 
+---------------------------------------------------------------
+
+RAII - Resource Acquisition Is Initialization 
+
+-Common idiom or pattern used in sw design based on container obj lifetime. 
+
+-RAII objs are allocated on the stack 
+
+-Resource Acquisition
+	-Open a file
+	-Allocate memory
+	-Acquire a lock
+
+*It means that RAII objs will acquire some sort of resource that could be 
+ opening a file, allocating memory, acquiring a lock and so forth. 
+
+-Is Initialization
+	-The resource is acquired in a constructor 
+
+*This means that the resource is acquired at obj initialization time. 
+
+-Resorce relinquishing
+	-Happens in the destructor
+		-Close the file
+		-Deallocate the memory
+		-Release the lock 
+
+*Smart ptrs are examples of RAII classes since this is the idiom they follow 
+with regard to memory resources. 
+**********************************************************
+
+Lecture 199. Unique Pointers
+
+-Simple smart ptr - very efficient!
+
+-unique_ptr<T>
+	-Points to an obj of type T on the heap 
+	-It is unique - there can only be one unique_ptr<T> pointing to the obj on the heap 
+	-Owns what it points to 
+	-Cannot be assigned or copied 
+	-CAN be moved
+	-When the ptr is destroyed, what it points to is automatically destroyed. 
+
+**********************************************************
+
+**********************************************************
+
+
+**********************************************************
+
+Lecture 201. Weak Pointers
+weak_ptr
+
+-Provides a non-owning "weak" reference
+
+-weak_ptr<T>
+	-points to an obj of type T on the heap
+	-Does not participate in owning relationship 
+	-Always created from a shared_ptr
+	-Does NOT increment or decrement reference use count 
+	-used to prevent strong reference cycles which could prevent objs from being deleted
+
+**********************************************************
+
+Lecture 202. Custom Deleters
+
+-Sometimes when we destroy a smart ptr we need more than to just destroy the obj 
+ on the heap 
+
+-These r special use-cases
+
+-C++ smart ptrs allow u to provide custom deleters 
+
+-Lots of way to achieve this 
+	-funcs
+	-lambdas
+	-others ...
+	
+*Sometimes when we use ptrs to see structures from C frameworks, we have to provide 
+ a specialized way of destroying them since in many cases they don't have dtors. 
+ 
+ These are special use cases that u wont run into very often. 
+ But if u do, C++ smart ptrs allow u to provide custom deleters that will be called 
+ when the smart ptr is destroyed. 
+ 
+ If u use custom deleters, u cant use make shared or make unique when u create your 
+ smart ptr objs since we need to provide our custom deleter and these funcs don't
+ support that. 
+ 
+ The idea is that if u need a specialized way to delete your objs, u probably need 
+ a specialized way to create them too. 
+ 
+ There r lots of ways to provide custom deleters. Two ways in these slides. 
+ First, using a func and then using a lambda. 
+ 
+---------------------------------------------------------------
+Custom deleters - func 
+
+void my_deleter(Some_Class *raw_pointer){
+	// your custom deleter code
+	delete raw_pointer;
+}
+
+shared_ptr<Some_Class> ptr {new Some_Class{}, my_deleter};
+
+---------------------------------------------------------------
+Custom deleters - lambda 
+
+std::shared_ptr<Test> p1 {new Test{30}, [] (Test *ptr){
+	std::cout << "\tLambda Using my custom func deleter for: " << ptr->get_data() << std::endl;
+	delete ptr;
+}};
+
+---------------------------------------------------------------
+
+*In a nutshell, a lambda is an anonymous func that has no name and can be defined 
+ in line right where u expect to use it. 
+
+*There r many opinions as to what types of smart ptrs u should use when. 
+ The answer is usually, it depends. 
+ I'll encourage u to use unique ptrs as often as u can 
+ since they r simple, efficient and in most cases 
+ they r drop-ins for many of the common ptr use cases. 
+ 
+ Then use shared ptrs when u have more complex object management semantics, 
+ involving shared ownership. 
+ 
+**********************************************************
+
+**********************************************************
+
+Section 18: Exception Handling 
+
+Lecture 205. Section Overview
+
+Exception Handling
+
+-What is an Exception?
+
+-What is Exception Handling?
+
+-What do we throw and catch exceptions?
+
+-How does it affect flow of control?
+
+-Defining our own exception classes 
+
+-The Standard Library Exception Hierarchy
+	-std::exception and what()
+	
+**********************************************************
+
+Lecture 206. Basic Concepts and a Simple Example: Dividing by Zero
+
+Basic concepts
+
+-Exception handling
+	-dealing with extraordinary situations
+	-indicates that an extraordinary situation has been detected or has occured
+	-program can deal with the extraordinary situations in a suitable manner 
+
+-What causes exceptions?
+	-insufficient resources
+	-missing resources
+	-invalid operations
+	-range violations
+	-underflows and overflows
+	-illegal data and many others
+
+-Exception safe
+	-when your code handles exceptions
+	
+*First, exceptions in c++ should be used only for synchronous code, not asynchronous code.
+---------------------------------------------------------------
+
+Terminology
+
+-Exception
+	-an obj or primitive type that signals that an error has occured
+
+-Throwing an exception(raising an exception)
+	-your code detects that an error has occured or will occur
+	-the place where the error occured may not know how to handle the error
+	-code can throw an exception describing the error to another part of the program 
+	that knows how to handle the error
+
+-Catching an exception(handle the exception)
+	-code that handles the exception
+	-may or may not cause the program to terminate 
+	
+---------------------------------------------------------------
+
+C++ Syntax
+	
+-try{ code that may throw an exception}
+	-you place code that may throw an exception in a try block
+	-if the code throws an exception the try block is exited
+	-the thrown exception is handled by a catch handler 
+	-if no catch handler exists the program terminates
+
+-throw
+	-throws an exception
+	-followed by an argument
+	
+-catch(Exception ex) {code to handle the exception}
+	-code that handles the exception
+	-can have multiple catch handlers
+	-may or may not cause the program to terminate
+---------------------------------------------------------------
+
+Divided by zero example
+
+-What happens if total is zero?
+	-crash, overflow?
+	-it depends
+	
+	double average{};
+	average = sum / total;
+---------------------------------------------------------------
+*Does the program crash, do we get an undefined result?
+	The answer is yes to all of them. It really depends
+	because the result of a division by 0 depends on the types of the arguments
+	in the division operation.
+
+	Integer divided by 0
+	and floating point divided by 0 may provide different results. 	
+
+	double average{};
+	if(total == 0)
+		// what to do?
+	else
+		average = sum / total;
+
+*What to do? 
+ Well,that totally depends on the app.
+ This question becomes much more difficult if this code existed in a func and 
+ that func calculates and returns the average. 
+ What do we return from that func if total is 0?
+--------------------------------------------------------------- 
+
+Divided by zero example
+
+double average{};
+
+try{							// try block
+	if(total == 0)
+		throw 0;				// throw the exception
+	
+	average = sum / total; 		// won't execute if total == 0
+	// use average here 
+}
+
+catch (int &ex){				// exception handler 
+	std::cerr << "can't divide by zero " << std::endl;
+}
+
+std::cout << "program continues" << std::endl;
+--------------------------------------------------------------- 
+
+*You wouldn't write code like this since we could print an error message easily with 
+ a simple if else statement as in the previous slide, but let's look at this code together. 
+
+**********************************************************
+
+Lecture 207. Throwing an Exception from a Func
+
+What do we return if total is zero?
+
+double calculate_avg(int sum, int total){
+	return static_cast<double>(sum) / total;
+}
+--------------------------------------------------------------- 
+
+double calculate_avg(int sum, int total){
+	if(total == 0)
+		throw 0;
+	
+	return static_cast<double>(sum) / total;
+}
+--------------------------------------------------------------- 
+
+Catching an exception thrown from a func
+
+double average{};
+
+try{
+	average = calculate_avg(sum,total);
+	std::cout << average << std::endl;
+}
+
+catch(int &ex){
+	std::cerr << "You can't divide by zero" << std::endl;
+}
+
+std::cout << "Bye" << std::endl;
+
+**********************************************************
+
+Lecture 208. Handling Multiple Exceptions
+
+Throwing multiple exceptions from a func
+
+What if a func can fail in several ways
+	-gallons is zero
+	-miles or gallons is negative
+
+Throw different type exceptions for each condition
+
+double calculate_avg(int miles, int gallons){
+	if(gallons == 0)
+		throw 0;
+	if(miles < 0 || gallons < 0)
+		throw std::string{"Negative value error"};
+	
+	return static_cast<double>(miles) / gallons;
+}
+
+--------------------------------------------------------------- 
+
+Catching any type of exception
+
+catch(int &ex){
+}
+
+catch(std::string &ex){
+}
+
+catch(...){
+	std::cerr << "Unknown exception" << std::endl;
+}
+
+*It's also possible to have a catch-all handler.
+ This catch handler will fire no matter what type of exception is thrown.
+ Notice the three dots or ellipsis in the catch all parameter list. 
+ You dont have access to the exception obj thrown in this case!!!!!!!!!!!, 
+ but u can deal with the exception in the body of the catch-all block. 
+
+**********************************************************
+
+Lecture 209. Stach Unwinding and How It Works 
+
+We'll see how C++ looks for catch handlers when an exception is thrown.
+
+Stack unwinding
+
+If an exception is thrown but not caught in the current scope
+C++ tries to find a handler for the exception by unwinding the stack 
+
+-Func in which the exception was not caught terminates and is removed from the call stack.
+
+-If a try block was used to then catch blocks are checked for a match 
+
+-If no try block was used or the catch handler doesn't match stack unwinding occurs again. 
+
+-If the stack is unwound back to main and no catch handler handles the exception 
+ the prog terminates. 
+
+**********************************************************
+
+Lecture 210. Creating User-Defined Exception Classes
+
+We can create exception classes and throw instances of those classes 
+
+Best practice:
+	-throw an obj not a primitive type 
+	-throw an obj by value
+	-catch an obj by reference(or const ref)
+
+**********************************************************
+
+Lecture 211. Class Level Exceptions
+
+Exceptions can also be thrown from within a class:
+
+-Method
+	-These work the same way as they do for funcs as we've seen 
+
+-Constructor
+	-Ctors may fail
+	-Ctors do not return any value
+	-Throw an exception in the ctor if u cannot initialize an obj 
+
+-Destructor
+	-Do NOT throw exceptions from your dtor. 
+	
+*The dtor is marked in C++ as no except by default, which means that it does not throw exceptions. 
+ If a dtor is called as a result of an exception being thrown elsewhere and then the dtor 
+ throws an exception, then there's a problem since the original catch block will never be reached. 
+ This is a very bad situation. 
+ The only time a dtor might throw an exception is if it handles itself, 
+ and that's a very unlikely use case. 
+ So remember, best practice is do not throw exceptions from a dtor. 
+
+*Ctors may fail for many reasons. For ex, suppose you're allocating memory dynamically and 
+ you're unable to allocate it or if you open a file in the ctor but the file doesn't exist. 
+ In cases such as these, the ctor can throw an exception. 
+ 
+Account::Account(std::string n, double bal)
+    : name{n}, balance{bal} {
+	
+	if(bal < 0)
+		throw IllegalBalanceException{};
+	
+}
+
+try{
+	std::unique_ptr<Account> moes_account = 
+		std::make_unique<Checking_Account>("Moe", -10.0);
+	// use moes_account
+}
+
+catch(const IllegalBalanceException &ex){
+	std::cerr << "Couldn't create account" << std::endl;
+}
+ 
+**********************************************************
+
+Lecture 212. The C++ std::exception Class Hierarchy
+
+C++ provides a class hierarchy of exception classes
+	-std::exception is the base class
+	-all subclasses implement the what() virtual func 
+	-we can create our own user-defined exception subclasses
+
+virtual const char* what() const noexcept; 
+
+--------------------------------------------------------------- 
+Deriving our class from std::exception
+
+class IllegalBalanceException: public std::exception {
+public:
+    IllegalBalanceException() noexcept = default;	
+	~IllegalBalanceException() = default;	
+	virtual const char* what() const noexcept{
+		return "Illegal balance exception";
+	}
+};
+
+*noexcept keyword tells the compiler that the method will not throw an exception. 
+ The dtor is noexcept by default. 
+ If u do happen to throw an exception from a no throw method, the prog will terminate, 
+ the exception will not be handled. 
+
+**********************************************************
+
+**********************************************************
+
+Section 19: I/O and Streams 
+
+Lecture 215. Section Overview
+
+-Streams and I/O
+
+-Stream manipulators
+
+-Reading and writing to a text file
+
+-Using string streams
+**********************************************************
+
+Lecture 216. Files, Streams and I/O
+
+-C++ uses streams as an interface btw the prog and input and output devices 
+
+-Independent of the actual device 
+
+-Sequence of bytes 
+
+-Input stream provides data to the prog
+
+-Output stream receives data from the prog 
+
+*Writing an IO library for any programming language is an extremely difficult task.
+ There can be all sorts of devices providing data to your program,
+ and your program can send data to many types of devices as well.
+ These devices may be physical devices such as hard disks,
+ the console and the keyboard or they can be virtual devices,
+ such as some connection to a web server.
+ C++ provides a stream abstraction to work with IO devices.
+ A stream is an interface that's independent of the actual device.
+ So from the programmer's perspective, we can code to the stream interface,
+ and not worry too much about what device is connected to the stream.
+ A stream is exactly as you would expect. It's a sequence of bytes.
+ C++ provides different types of streams
+ depending on whether we want input or output,
+ but we can also use a stream that does both.
+
+**********************************************************
+
+Lecture 218. Stream Manipulators - boolean
+
+Formatting boolean types 
+
+-Default when displaying boolean values is 1 or 0
+
+-Sometimes the strings true or false are more appropriate 
+
+std::cout << (10 == 20) << std::endl;
+
+//will display
+
+0
+--------------------------------------------------------------- 
+
+std::cout << std::boolalpha;
+
+std::cout << (10 == 20) << std::endl;
+
+//will display
+
+false
+--------------------------------------------------------------- 
+
+-All further boolean output will be affected
+
+std::cout << std::boolalpha;	// true or false
+std::cout << std::noboolalpha;	// 1 or 0
+--------------------------------------------------------------- 
+
+Formatting boolean types 
+
+-Method version
+
+std::cout.setf(std::ios::boolalpha);
+std::cout.setf(std::ios::noboolalpha);
+
+-Reset to default
+
+std::cout << std::resetiosflags(std::ios::boolalpha);
+
+**********************************************************
+
+Lecture 219. Stream Manipulators - integers
+
+Formatting integer types 
+
+-Default when displaying integer values is:
+	-dec(base 10)
+	-noshowbase - prefix used to show hexadecimal or octal
+	-nouppercase - when displaying a prefix and hex values it will be lower case
+	-noshowpos - no '+' is displayed for positive numbers
+	
+-These manipulators affect all further output to the stream 
+--------------------------------------------------------------- 
+Formatting integer types - setting base
+
+int num{255};
+
+std::cout << std::dec << num << std::endl;
+std::cout << std::hex << num << std::endl;
+std::cout << std::oct << num << std::endl;
+
+//will display
+255
+ff
+377
+--------------------------------------------------------------- 
+
+Formatting integer types - showing the base
+
+int num{255};
+
+std::cout << std::showbase;
+std::cout << std::dec << num << std::endl;
+std::cout << std::hex << num << std::endl;
+std::cout << std::oct << num << std::endl;
+
+//will display
+255
+0xff		// note the 0x prefix for hex
+0377		// note the 0 prefix for octal
+--------------------------------------------------------------- 
+
+Formatting integer types - displaying hex in uppercase
+
+int num{255};
+
+std::cout << std::showbase << std::uppercase;
+std::cout << std::hex << num << std::endl;
+
+//will display
+0XFF		// note capitalized XFF
+--------------------------------------------------------------- 
+
+Formatting integer types - displaying the pos sign 
+
+int num1{255};
+int num2{-255};
+
+std::cout << num1 << std::endl;		// 255
+std::cout << num2 << std::endl;		// -255
+
+std::cout << std::showpos;
+
+std::cout << num1 << std::endl;		// +255
+std::cout << num2 << std::endl;		// -255
+--------------------------------------------------------------- 
+
+Setting/resetting integer types
+
+-Set using setf	
+	std::cout.setf(std::ios::showbase);
+	std::cout.setf(std::ios::uppercase);
+	std::cout.setf(std::ios::showpos);
+
+-Reset to defaults
+	std::cout << std::resetiosflags(std::ios::basefield);
+	std::cout << std::resetiosflags(std::ios::showbase);
+	std::cout << std::resetiosflags(std::ios::showpos);
+	std::cout << std::resetiosflags(std::ios::uppercase);
+ 
+
+
+**********************************************************
+
+Lecture 221. Stream Manipulators - align and fill
+
+Field width, align, and fill
+
+-Default when displaying floating point values is:
+	-setw - not set by default
+	-left - when no field width, right - when using field width 
+	-fill - not set by default - blank space is used 
+
+-Some of these manipulators affect only the next data element put on the stream 
+--------------------------------------------------------------- 
+
+Defaults 
+
+	double num{1234.5678};
+	std::string hello{"Hello"};
+	
+	std::cout << num << hello << std::endl;
+	
+//will display
+
+1234.57Hello
+--------------------------------------------------------------- 
+
+Field width - setw
+
+	double num{1234.5678};
+	std::string hello{"Hello"};
+	
+	std::cout << std::setw(10) << num 
+			  << hello << std::endl;
+	
+//will display
+1234567890123456789012345678901234567890
+   1234.57Hello
+--------------------------------------------------------------- 
+
+Field width - setw
+
+	double num{1234.5678};
+	std::string hello{"Hello"};
+	
+	std::cout << std::setw(10) << num 
+			  << std::setw(10) << hello << std::endl;
+	
+//will display
+1234567890123456789012345678901234567890
+   1234.57     Hello
+--------------------------------------------------------------- 
+
+Field width - justification
+
+	double num{1234.5678};
+	std::string hello{"Hello"};
+	
+	std::cout << std::setw(10) << std::left << num 			// only affects num!
+			  << std::setw(10) << hello << std::endl;
+	
+//will display
+1234567890123456789012345678901234567890
+1234.57        Hello
+--------------------------------------------------------------- 
+
+Field width - setw
+
+	double num{1234.5678};
+	std::string hello{"Hello"};
+	
+	std::cout << std::setw(10) << num 		
+			  << std::setw(15) << std::right << hello << std::endl;
+	
+//will display
+1234567890123456789012345678901234567890
+   1234.57          Hello
+--------------------------------------------------------------- 
+
+Field width - setfill 
+
+	double num{1234.5678};
+	std::string hello{"Hello"};
+	
+	std::cout << std::setfill('-');
+	std::cout << std::setw(10) << num 		
+			  << hello << std::endl;
+	
+//will display
+1234567890123456789012345678901234567890
+---1234.57Hello
+--------------------------------------------------------------- 
+
+Field width - setw 
+
+	double num{1234.5678};
+	std::string hello{"Hello"};
+	
+	std::cout << std::setfill('*');
+	std::cout << std::setw(10) << num 		
+			  << std::setfill('-') << std::setw(10) << hello 
+			  << std::setw(15) << hello << std::endl;
+	
+//will display
+1234567890123456789012345678901234567890
+***1234.57-----Hello----------Hello
+--------------------------------------------------------------- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
